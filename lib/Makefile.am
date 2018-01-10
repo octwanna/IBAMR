@@ -102,6 +102,7 @@ DIM_INDEPENDENT_SOURCES = \
 ../src/adv_diff/AdvDiffPhysicalBoundaryUtilities.cpp \
 ../src/adv_diff/AdvDiffSemiImplicitHierarchyIntegrator.cpp \
 ../src/adv_diff/AdvDiffStochasticForcing.cpp \
+../src/adv_diff/AdvDiffWavePropConvectiveOperator.cpp \
 ../src/advect/AdvectorExplicitPredictorPatchOps.cpp \
 ../src/advect/AdvectorPredictorCorrectorHyperbolicPatchOps.cpp \
 ../src/level_set/FastSweepingLSMethod.cpp \
@@ -166,6 +167,7 @@ pkg_include_HEADERS += \
 ../include/ibamr/AdvDiffPredictorCorrectorHyperbolicPatchOps.h \
 ../include/ibamr/AdvDiffSemiImplicitHierarchyIntegrator.h \
 ../include/ibamr/AdvDiffStochasticForcing.h \
+../include/ibamr/AdvDiffWavePropConvectiveOperator.h \
 ../include/ibamr/AdvectorExplicitPredictorPatchOps.h \
 ../include/ibamr/AdvectorPredictorCorrectorHyperbolicPatchOps.h \
 ../include/ibamr/CIBMethod.h \
@@ -267,6 +269,7 @@ libIBAMR2d_a_CXXFLAGS = $(AM_CXXFLAGS) -DNDIM=2
 libIBAMR2d_a_CFLAGS = $(AM_CFLAGS) -DNDIM=2
 libIBAMR2d_a_SOURCES = $(DIM_INDEPENDENT_SOURCES) \
 $(top_builddir)/src/adv_diff/fortran/adv_diff_consdiff2d.f \
+$(top_builddir)/src/adv_diff/fortran/wave_prop_conv_oper_2d.f \
 $(top_builddir)/src/advect/fortran/advect_centered_derivatives2d.f \
 $(top_builddir)/src/advect/fortran/advect_detect2d.f \
 $(top_builddir)/src/advect/fortran/advect_diff2d.f \
@@ -284,6 +287,7 @@ libIBAMR3d_a_CXXFLAGS = $(AM_CXXFLAGS) -DNDIM=3
 libIBAMR3d_a_CFLAGS = $(AM_CFLAGS) -DNDIM=3
 libIBAMR3d_a_SOURCES = $(DIM_INDEPENDENT_SOURCES) \
 $(top_builddir)/src/adv_diff/fortran/adv_diff_consdiff3d.f \
+$(top_builddir)/src/adv_diff/fortran/wave_prop_conv_oper_3d.f \
 $(top_builddir)/src/advect/fortran/advect_centered_derivatives3d.f \
 $(top_builddir)/src/advect/fortran/advect_detect3d.f \
 $(top_builddir)/src/advect/fortran/advect_diff3d.f \
