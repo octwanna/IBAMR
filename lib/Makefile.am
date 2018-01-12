@@ -125,6 +125,7 @@ DIM_INDEPENDENT_SOURCES = \
 ../src/navier_stokes/INSStaggeredStochasticForcing.cpp \
 ../src/navier_stokes/INSStaggeredUpwindConvectiveOperator.cpp \
 ../src/navier_stokes/INSStaggeredVelocityBcCoef.cpp \
+../src/navier_stokes/INSStaggeredWavePropConvectiveOperator.cpp \
 ../src/navier_stokes/KrylovLinearSolverStaggeredStokesSolverInterface.cpp \
 ../src/navier_stokes/PETScKrylovStaggeredStokesSolver.cpp \
 ../src/navier_stokes/SpongeLayerForceFunction.cpp \
@@ -224,6 +225,7 @@ pkg_include_HEADERS += \
 ../include/ibamr/INSStaggeredStochasticForcing.h \
 ../include/ibamr/INSStaggeredUpwindConvectiveOperator.h \
 ../include/ibamr/INSStaggeredVelocityBcCoef.h \
+../include/ibamr/INSStaggeredWavePropConvectiveOperator.h \
 ../include/ibamr/KrylovFreeBodyMobilitySolver.h \
 ../include/ibamr/KrylovLinearSolverStaggeredStokesSolverInterface.h \
 ../include/ibamr/KrylovMobilitySolver.h \
@@ -269,7 +271,7 @@ libIBAMR2d_a_CXXFLAGS = $(AM_CXXFLAGS) -DNDIM=2
 libIBAMR2d_a_CFLAGS = $(AM_CFLAGS) -DNDIM=2
 libIBAMR2d_a_SOURCES = $(DIM_INDEPENDENT_SOURCES) \
 $(top_builddir)/src/adv_diff/fortran/adv_diff_consdiff2d.f \
-$(top_builddir)/src/adv_diff/fortran/wave_prop_conv_oper_2d.f \
+$(top_builddir)/src/adv_diff/fortran/wave_prop_convective_oper_2d.f \
 $(top_builddir)/src/advect/fortran/advect_centered_derivatives2d.f \
 $(top_builddir)/src/advect/fortran/advect_detect2d.f \
 $(top_builddir)/src/advect/fortran/advect_diff2d.f \
@@ -281,13 +283,14 @@ $(top_builddir)/src/navier_stokes/fortran/navier_stokes_divsource2d.f \
 $(top_builddir)/src/navier_stokes/fortran/navier_stokes_stabledt2d.f \
 $(top_builddir)/src/navier_stokes/fortran/navier_stokes_staggered_derivatives2d.f \
 $(top_builddir)/src/navier_stokes/fortran/navier_stokes_staggered_helpers2d.f \
-$(top_builddir)/src/navier_stokes/fortran/navier_stokes_stochastic_forcing2d.f
+$(top_builddir)/src/navier_stokes/fortran/navier_stokes_stochastic_forcing2d.f \
+$(top_builddir)/src/navier_stokes/fortran/wave_prop_convective_oper_u_s_2d.f
 
 libIBAMR3d_a_CXXFLAGS = $(AM_CXXFLAGS) -DNDIM=3
 libIBAMR3d_a_CFLAGS = $(AM_CFLAGS) -DNDIM=3
 libIBAMR3d_a_SOURCES = $(DIM_INDEPENDENT_SOURCES) \
 $(top_builddir)/src/adv_diff/fortran/adv_diff_consdiff3d.f \
-$(top_builddir)/src/adv_diff/fortran/wave_prop_conv_oper_3d.f \
+$(top_builddir)/src/adv_diff/fortran/wave_prop_convective_oper_3d.f \
 $(top_builddir)/src/advect/fortran/advect_centered_derivatives3d.f \
 $(top_builddir)/src/advect/fortran/advect_detect3d.f \
 $(top_builddir)/src/advect/fortran/advect_diff3d.f \
@@ -299,4 +302,5 @@ $(top_builddir)/src/navier_stokes/fortran/navier_stokes_divsource3d.f \
 $(top_builddir)/src/navier_stokes/fortran/navier_stokes_stabledt3d.f \
 $(top_builddir)/src/navier_stokes/fortran/navier_stokes_staggered_derivatives3d.f \
 $(top_builddir)/src/navier_stokes/fortran/navier_stokes_staggered_helpers3d.f \
-$(top_builddir)/src/navier_stokes/fortran/navier_stokes_stochastic_forcing3d.f
+$(top_builddir)/src/navier_stokes/fortran/navier_stokes_stochastic_forcing3d.f \
+$(top_builddir)/src/navier_stokes/fortran/wave_prop_convective_oper_u_s_3d.f
