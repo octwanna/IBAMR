@@ -313,6 +313,41 @@ public:
     void registerLagSurfaceForceFunction(const LagSurfaceForceFcnData& data, unsigned int part = 0);
 
     /*!
+     * Typedef specifying interface for Lagrangian mass source/sink distribution
+     * function.
+     */
+    typedef IBTK::ScalarMeshFcnPtr LagBodySourceFcnPtr;
+
+    /*!
+     * Struct encapsulating Lagrangian mass source/sink distribution data.
+     */
+    struct LagBodySourceFcnData
+    {
+        LagBodySourceFcnData(LagBodySourceFcnPtr fcn = NULL,
+                             const std::vector<IBTK::SystemData>& system_data = std::vector<IBTK::SystemData>(),
+                             void* const ctx = NULL)
+            : fcn(fcn), system_data(system_data), ctx(ctx)
+        {
+        }
+
+        LagBodySourceFcnPtr fcn;
+        std::vector<IBTK::SystemData> system_data;
+        void* ctx;
+    };
+
+    /*!
+     * Register the (optional) function to compute a mass source/sink
+     * distribution on the Lagrangian finite element mesh.
+     */
+    void registerLagBodySourceFunction(const LagBodySourceFcnData& data, unsigned int part = 0);
+
+    /*!
+     * Register an (optional) system to specify a mass source/sink distribution
+     * on the Lagrangian finite element mesh.
+     */
+    void registerLagBodySourceSystem(const System& source_system, unsigned int var_num = 0, unsigned int part = 0);
+
+    /*!
      * Return the number of ghost cells required by the Lagrangian-Eulerian
      * interaction routines.
      */
@@ -377,6 +412,36 @@ public:
                 IBTK::RobinPhysBdryPatchStrategy* f_phys_bdry_op,
                 const std::vector<SAMRAI::tbox::Pointer<SAMRAI::xfer::RefineSchedule<NDIM> > >& f_prolongation_scheds,
                 double data_time);
+
+    /*!
+     * Indicate whether there are any internal fluid sources/sinks.
+     */
+    bool hasFluidSources() const;
+
+    /*!
+     * Compute the Lagrangian source/sink density at the specified time within
+     * the current time interval.
+     */
+    void computeLagrangianFluidSource(double data_time);
+
+    /*!
+     * Spread the Lagrangian source/sink density to the Cartesian grid at the
+     * specified time within the current time interval.
+     */
+    void spreadFluidSource(
+        int q_data_idx,
+        const std::vector<SAMRAI::tbox::Pointer<SAMRAI::xfer::RefineSchedule<NDIM> > >& q_prolongation_scheds,
+        double data_time);
+
+    /*!
+     * Compute the pressures at the positions of any distributed internal fluid
+     * sources or sinks.
+     */
+    void interpolatePressure(
+        int p_data_idx,
+        const std::vector<SAMRAI::tbox::Pointer<SAMRAI::xfer::CoarsenSchedule<NDIM> > >& p_synch_scheds,
+        const std::vector<SAMRAI::tbox::Pointer<SAMRAI::xfer::RefineSchedule<NDIM> > >& p_ghost_fill_scheds,
+        double data_time);
 
     /*!
      * Get the default interpolation spec object used by the class.
